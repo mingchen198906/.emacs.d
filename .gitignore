@@ -1,0 +1,16 @@
+*.[oa]
+*.elc
+*~
+.save*
+*#
+.emacs.desktop*
+*tramp*
+/.emacs.desktop
+/.emacs.desktop.lock
+/init.el~
+/ac-comphist.dat
+session.*
+elpa/
+auto-save-list/
+*.dat
+*.eld
