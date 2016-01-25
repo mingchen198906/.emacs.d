@@ -1,4 +1,11 @@
 ;; ;; Install necessary packages for emacs
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (load "~/.emacs.d/setting/install-packages.el")
 ;; ;; Customer functions and configuration
 (load "~/.emacs.d/setting/custom-functions.el")
@@ -62,7 +69,7 @@
 (key-chord-define evil-visual-state-map "jk" 'evil-change-to-previous-state)
 (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 (key-chord-define evil-replace-state-map "jk" 'evil-normal-state)
-(key-chord-define-global "JK" 'other-window)
+(key-chord-define-global "ji" 'other-window)
 (key-chord-define-global "JJ" 'save-buffer)
 (key-chord-define-global "KK" 'kill-buffer)
 (key-chord-define-global "kl" 'switch-to-buffer)
@@ -82,7 +89,7 @@
 
 ;; ;; Aspell feature
 (setq-default ispell-program-name "aspell")
-(ac-flyspell-workaround)
+;; (ac-flyspell-workaround)
 (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker" t)
 (autoload 'flyspell-delay-command "flyspell" "Delay on command" t)
 
@@ -132,8 +139,8 @@ your recently and most frequently used commands.")
 
 ;; ;; auto-complete
 (load "~/.emacs.d/setting/auto-complete-settings.el")
-(require 'freq-word)
-(ac-define-dictionary-source ac-freq-word freq-word-list)
+(load "~/.emacs.d/freq-word.el")
+;; (ac-define-dictionary-source ac-freq-word freq-word-list)
 
 ;; ;; elpy
 (when (require 'elpy nil t)
@@ -233,7 +240,13 @@ your recently and most frequently used commands.")
 
 
 ;; ;; evil-avy
-(require evil-avy)
+(avy-setup-default)
+(global-set-key (kbd "C-:") 'avy-goto-char)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g f") 'avy-goto-line)
+(global-set-key (kbd "M-g w") 'avy-goto-word-1)
+(global-set-key (kbd "M-g e") 'avy-goto-word-2)
+(autoload 'evil-avy "evil-avy")
 
 ;; ;; recentf configuration
 (require 'recentf)
@@ -249,3 +262,30 @@ your recently and most frequently used commands.")
 (projectile-global-mode)
 (setq projectile-completion-system 'helm)
 (helm-projectile-on)
+
+
+;; configuration
+(key-chord-define-global "SS" (lambda()
+		  (interactive)
+		  (shell)))
+
+
+;; ;; tramp
+(require 'ssh)
+(setq tramp-default-method "ssh")
+(setq ad-redefinition-action 'accept)
+(add-hook 'ssh-mode-hook 'ssh-directory-tracking-mode)
+ (custom-set-variables '(ido-enable-tramp-completion nil))
+(recentf-mode 1)
+
+
+;; no tabs
+(setq-default indent-tabs-mode nil)
+(setq-default tabs-wdith 4)
+(setq tramp-chunksize 500)
+(setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
+
+
+
+;; ;; (load "~/.emacs.d/setting/bookmark.el")
+

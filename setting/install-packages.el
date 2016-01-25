@@ -13,6 +13,7 @@
 
 (defvar myPackages
   '(ess
+    ssh
     recentf
     projectile
     helm-projectile
@@ -60,7 +61,6 @@
     auctex
     pdf-tools
     evil-smartparens
-    freq-word
     find-file-in-project
     desktop))
 
