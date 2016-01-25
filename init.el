@@ -285,7 +285,17 @@ your recently and most frequently used commands.")
 (setq tramp-chunksize 500)
 (setq tramp-shell-prompt-pattern "^[^$>\n]*[#$%>] *\\(\[[0-9;]*[a-zA-Z] *\\)*")
 
+(global-set-key (kbd "<f12>")
+		(lambda()
+		  (interactive)
+		  (find-file "~/.emacs.d/init.el")
+		  (load-file "~/.emacs.d/init.el")))
 
+
+(global-set-key (kbd "<f11>")
+		(lambda()
+		  (interactive)
+		  (shell)))
 
 ;; ;; (load "~/.emacs.d/setting/bookmark.el")
 
