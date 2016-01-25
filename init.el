@@ -151,7 +151,9 @@ your recently and most frequently used commands.")
 (define-key yas-minor-mode-map (kbd "C-c k") 'yas-expand)
 ;; Fixing another key binding bug in iedit mode
 (define-key global-map (kbd "C-c o") 'iedit-mode)
-(setenv "PYTHONPATH" "/usr/bin/python")
+;; (setenv "PYTHONPATH" "/usr/bin/python")
+(add-hook 'python-mode-hook '(lambda ()
+			    (local-set-key (kbd "C-c C-a") 'elpy-autopep8-fix-code)))
 
 ;; ;; org
 ;; ;; org-plus-contrib
@@ -246,7 +248,11 @@ your recently and most frequently used commands.")
 (global-set-key (kbd "M-g f") 'avy-goto-line)
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 (global-set-key (kbd "M-g e") 'avy-goto-word-2)
-(autoload 'evil-avy "evil-avy")
+;; (autoload 'evil-avy "evil-avy")
+(define-key evil-normal-state-map "F" 'avy-goto-char2)
+(define-key evil-normal-state-map "f" 'avy-goto-char)
+(define-key evil-normal-state-map "e" 'avy-goto-word-1)
+(define-key evil-normal-state-map "E" 'avy-goto-word-2)
 
 ;; ;; recentf configuration
 (require 'recentf)
@@ -290,12 +296,25 @@ your recently and most frequently used commands.")
 		  (interactive)
 		  (find-file "~/.emacs.d/init.el")
 		  (load-file "~/.emacs.d/init.el")))
+(fset 'yes-or-no-p 'y-or-n-p)
+(auto-image-file-mode t)
+;; show match parenthesis
+(show-paren-mode t)
+;; display Tue Jun 24 01:07:07 2014
+(display-time-mode 1)
+;; mouse avoid
+(mouse-avoidance-mode 'animate)
+;; paste in middle 
+(setq mouse-yank-at-point t)
 
+;; allow outside paste
+(setq x-select-enable-clipboard t)
 
 (global-set-key (kbd "<f11>")
 		(lambda()
 		  (interactive)
 		  (shell)))
 
-;; ;; (load "~/.emacs.d/setting/bookmark.el")
+(load "~/.emacs.d/setting/bookmark.el")
+(setq python-shell-interpreter "./runpy")
 
