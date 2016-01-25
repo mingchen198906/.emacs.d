@@ -15,5 +15,5 @@ auto-save-list/
 *.dat
 *.eld
 /setting/bookmark.el
-ido.last
-ido.last
+*.last
+places
