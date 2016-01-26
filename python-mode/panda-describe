@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: panda-describe
+# key: pdd
+# group : pandas
+# --
+${1:data}.describe()
+$0

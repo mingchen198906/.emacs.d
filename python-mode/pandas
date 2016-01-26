@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: panda-read
+# key: pdr
+# group : pandas
+# --
+${1:data} = read_csv(${2},sep=${3:,},${4:engine="c"})
+$0

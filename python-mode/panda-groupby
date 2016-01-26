@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: panda-groupby
+# key: pdg
+# group : pandas
+# --
+${1:data}.groupby([${2:groupby_fied$((lambda(y)(mapconcat 'identity (mapcar (lambda (x) (concat "\"" x "\"")) (split-string y "," ",")) ",")) yas-text)}])$0
