@@ -162,7 +162,8 @@ your recently and most frequently used commands.")
 ;; ;; yasnippet
 (require 'yasnippet)
 (yas/initialize)
-(add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+;; (add-to-list 'yas-snippet-dirs "~/.emacs.d/snippets")
+(setq yas-snippet-dirs '("~/.emacs.d/yasnippet-snippets"))
 (yas-global-mode t)
 ;; (set-default 'ac-sources
 ;;              '(ac-source-abbrev
