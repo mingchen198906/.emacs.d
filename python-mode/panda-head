@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-# name: panda-head
-# key: pdh
-# group : pandas
-# --
-
-${1:data}.head(${2:10})
-
-$0
