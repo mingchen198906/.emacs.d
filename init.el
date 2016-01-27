@@ -200,6 +200,9 @@ your recently and most frequently used commands.")
 
 ;; ;; helm-swoop
 ;; ;; imenu-anywhere
+(add-hook 'prog-mode-hook 'imenu-add-menubar-index)
+(global-set-key (kbd "C-.") 'imenu-anywhere)
+(load "~/.emacs.d/setting/imenu-config.el")
 ;; ;; ace-window
 ;; ;; aggressive-indent
 ;; ;; flycheck
@@ -250,10 +253,10 @@ your recently and most frequently used commands.")
 (global-set-key (kbd "M-g w") 'avy-goto-word-1)
 (global-set-key (kbd "M-g e") 'avy-goto-word-2)
 ;; (autoload 'evil-avy "evil-avy")
-(define-key evil-normal-state-map "F" 'avy-goto-char2)
+(define-key evil-normal-state-map "F" 'avy-goto-char-2)
 (define-key evil-normal-state-map "f" 'avy-goto-char)
 (define-key evil-normal-state-map "e" 'avy-goto-word-1)
-(define-key evil-normal-state-map "E" 'avy-goto-word-2)
+(define-key evil-normal-state-map "E" 'avy-goto-line)
 
 ;; ;; recentf configuration
 (require 'recentf)
@@ -319,3 +322,6 @@ your recently and most frequently used commands.")
 (load "~/.emacs.d/setting/bookmark.el")
 (setq python-shell-interpreter "./runpy")
 
+;; ;; folding
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+(defalias 'fd 'hs-toggle-hiding)

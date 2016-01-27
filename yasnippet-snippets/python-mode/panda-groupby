@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: panda-groupby
+# key: pdg
+# group : pandas
+# --
+${1:data}.groupby([${2:group_by_col}])$0

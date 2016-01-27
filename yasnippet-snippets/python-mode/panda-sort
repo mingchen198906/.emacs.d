@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: panda-sort
+# key: pds
+# group : pandas
+# --
+${1:data}.sort([${2:group_by_col}],inplace=${3:False},axis=${4:1})$0

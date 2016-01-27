@@ -1,0 +1,55 @@
+# -*- mode: snippet -*-
+# name: python-class
+# key: class
+# group: class
+# --
+
+class ${1:Class_Name$(capitalize yas-text)}:
+    """$2"""
+    
+    
+    def __init__($3):
+        """$4
+        ${3:$
+          (let* 
+            ((indent
+                (concat "\n" (make-string (current-column) 32)))
+               (args
+                (mapconcat
+                 '(lambda (x)
+                    (if (not (string= (nth 0 x) ""))
+                        (concat "" (nth 0 x)
+                                 " : ")))
+                 (mapcar
+                  '(lambda (x)
+                     (mapcar
+                      '(lambda (x)
+                         (replace-regexp-in-string "[[:blank:]]*$" ""
+                          (replace-regexp-in-string "^[[:blank:]]*" "" x)))
+                      x))
+                  (mapcar '(lambda (x) (split-string x "="))
+                          (split-string yas-text ",")))
+                 indent)))
+          (if (string= args "")
+              ()
+            (mapconcat
+             'identity
+             (list "" "Parameters:" "--------" args "")
+             indent)))
+        }
+    
+        `(let* 
+            ((indent
+                (concat "\n" (make-string (current-column) 32))))
+                (mapconcat 'identity (list "Returns" "-------") indent))` 
+        $5
+        `(let* 
+            ((indent
+                (concat "\n" (make-string (current-column) 32))))
+                (mapconcat 'identity (list "" "Example" "-------") indent))` 
+        $6
+        `(make-string 3 34)`
+    
+        $0
+    
+

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: panda-pivot-table
+# key: pdp
+# group : pandas
+# --
+pivot_table(${1:data},values=$2,index=[$3],columns=[$4],aggfunc=$5)$0
