@@ -21,6 +21,7 @@
     ein
     better-defaults
     material-theme
+    maxframe
     smex
     auto-complete
     org

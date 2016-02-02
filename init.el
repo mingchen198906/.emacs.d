@@ -1,5 +1,4 @@
-;; ;; Install necessary packages for emacs
-
+;; ;; Install necessary packages for emacs 
 ;; Added by Package.el.  This must come before configurations of
 ;; installed packages.  Don't delete this line.  If you don't want it,
 ;; just comment it out by adding a semicolon to the start of the line.
@@ -39,9 +38,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ido-enable-tramp-completion nil)
+ '(org-agenda-files (quote ("~/daily/2016-01-27.org" "~/daily/diary.org")))
  '(package-selected-packages
    (quote
-    (evil-smartparens pdf-tools auctex multi-term fix-word discover-my-major linum-relative highlight-symbol flycheck aggressive-indent ace-window imenu-anywhere helm-swoop goto-last-change elscreen tabbar evil-avy multiple-cursors window-numbering smex smartparens rainbow-delimiters r-autoyas org-plus-contrib material-theme key-chord js2-mode jinja2-mode helm evil-magit el-autoyas clojure-snippets better-defaults auto-complete ace-jump-buffer ace-flyspell))))
+    (maxframe evil-smartparens pdf-tools auctex multi-term fix-word discover-my-major linum-relative highlight-symbol flycheck aggressive-indent ace-window imenu-anywhere helm-swoop goto-last-change elscreen tabbar evil-avy multiple-cursors window-numbering smex smartparens rainbow-delimiters r-autoyas org-plus-contrib material-theme key-chord js2-mode jinja2-mode helm evil-magit el-autoyas clojure-snippets better-defaults auto-complete ace-jump-buffer ace-flyspell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -156,6 +157,11 @@ your recently and most frequently used commands.")
 			    (local-set-key (kbd "C-c C-a") 'elpy-autopep8-fix-code)))
 
 ;; ;; org
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda)
+(setq org-log-done t)
+
 ;; ;; org-plus-contrib
 ;; ;; rainbow-delimiters
 ;; ;; jinja2-mode
@@ -230,6 +236,7 @@ your recently and most frequently used commands.")
  ;;            ))
 
 ;; ;; linum-relative
+(setq column-number-mode t)
 ;; ;; discover-my-major
 (global-set-key (kbd "C-h M-m") 'discover-my-major)
 (global-set-key (kbd "C-h M-S-m") 'discover-my-mode)
@@ -255,8 +262,6 @@ your recently and most frequently used commands.")
 ;; (autoload 'evil-avy "evil-avy")
 (define-key evil-normal-state-map "F" 'avy-goto-char-2)
 (define-key evil-normal-state-map "f" 'avy-goto-char)
-(define-key evil-normal-state-map "e" 'avy-goto-word-1)
-(define-key evil-normal-state-map "E" 'avy-goto-line)
 
 ;; ;; recentf configuration
 (require 'recentf)
@@ -285,7 +290,7 @@ your recently and most frequently used commands.")
 (setq tramp-default-method "ssh")
 (setq ad-redefinition-action 'accept)
 (add-hook 'ssh-mode-hook 'ssh-directory-tracking-mode)
- (custom-set-variables '(ido-enable-tramp-completion nil))
+ 
 (recentf-mode 1)
 
 
@@ -325,3 +330,33 @@ your recently and most frequently used commands.")
 ;; ;; folding
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 (defalias 'fd 'hs-toggle-hiding)
+;; (add-to-list 'hs-special-modes-alist
+;;              '(python-mode (make-string 3 34) (make-string 3 34)
+;;                            forward-sexp
+;;                            hs-c-like-adjust-block-beginning))
+
+
+
+;; ;; fullscreen 
+(require 'maxframe)
+(setq mf-max-width 10000)
+(add-hook 'window-setup-hook 'maximize-frame t)
+
+
+
+(defun print-today()
+  (interactive)
+  (format-time-string "%Y-%m-%d" (current-time)))
+
+;; ;; build vertical split
+(split-window-vertically)
+;; ;; org diary for each day
+(defun tl()
+  (interactive)
+  (find-file (concat "~/daily/" (print-today) ".org")))
+;;  ;; (find-file "~/daily/diary.org"))
+
+(tl)
+(split-window-horizontally)
+
+(setq org-agenda-files '("~/daily"))
